@@ -7,6 +7,34 @@ var sys = require("sys"),
     ws = require("nodejs-websocket"),
     qs = require("querystring"),
 
+    mimeTypes = {
+        "ecma": "application/ecmascript",
+        "epub": "application/epub+zip",
+        "js": "application/javascript",
+        "json": "application/json",
+        "doc": "application/msword",
+        "pdf": "application/pdf",
+        "cer": "application/pkix-cert",
+        "rss": "application/rss+xml",
+        "rtf": "application/rtf",
+        "xhtml": "application/xhtml+xml",
+        "xml": "application/xml",
+        "zip": "application/zip",
+        "bmp": "image/bmp",
+        "gif": "image/gif",
+        "jpg": "image/jpeg",
+        "png": "image/png",
+        "svg": "image/svg+xml",
+        "tiff": "image/tiff",
+        "css": "text/css",
+        "csv": "text/csv",
+        "html": "text/html",
+        "txt": "text/plain",
+        "uri": "text/uri-list",
+        "mp4": "video/mp4",
+        "mpg": "video/mpeg"
+    },
+
     server,
     webSocketConnection,
     webSocketData = '',
@@ -62,7 +90,7 @@ server = http.createServer( function( request, response ) {
                 response.end();
             } );
 
-            console.log( 'request auth dev data' );
+            // console.log( 'request auth dev data' );
         break;
 
         case '/getJsonData=searched-dev':
@@ -100,12 +128,16 @@ server = http.createServer( function( request, response ) {
                     response.end();
                 } else {
                     filesys.readFile( fullPath, "binary", function ( err, file ) {
-                         if ( err ) {
-                             response.writeHeader( 500, { "Content-Type": "text/plain" } );
-                             response.write( err + "\n" );
-                             response.end();
-                         } else {
-                            response.writeHeader( 200 );
+                        if ( err ) {
+                            response.writeHeader( 500, { "Content-Type": "text/plain" } );
+                            response.write( err + "\n" );
+                            response.end();
+                        } else {
+                            var extention = path.extname( fullPath ).split( '.' )[ 1 ],
+                                mimeType = getMimeType( extention ),
+                                headerSettings = { 'Content-Type': mimeType };
+
+                            response.writeHeader( 200, headerSettings );
                             response.write( file, "binary" );
                             response.end();
                         }
@@ -115,6 +147,14 @@ server = http.createServer( function( request, response ) {
         break;
     }
 } );
+
+function getMimeType ( type ) {
+    if ( type in mimeTypes ) {
+        return mimeTypes[ type ];
+    }
+
+    return '';
+}
 
 server.listen( 8080 );
 console.log( 'HTTP Server Started...' );
