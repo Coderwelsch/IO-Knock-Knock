@@ -1,0 +1,159 @@
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%; }
+
+h1, h2, h3, p {
+  color: #FFF;
+  font-family: monospace;
+  text-align: center; }
+
+#overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  max-width: 450px;
+  padding: 20px;
+  display: none;
+  transform: translate(-50%, -50%);
+  background-color: #eeeeee;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
+  #overlay.show {
+    display: block; }
+  #overlay h1 {
+    color: #000;
+    padding-bottom: 10px; }
+  #overlay p {
+    color: #000;
+    text-align: left;
+    font-size: 14px; }
+    #overlay p span {
+      background-color: #bbbbbb; }
+  #overlay .buttons {
+    margin-top: 10px;
+    text-align: center; }
+    #overlay .buttons .button {
+      min-width: 70px;
+      display: inline-block;
+      font-family: monospace;
+      color: #FFF;
+      cursor: pointer;
+      padding: 10px;
+      transition: color 0.25s linear, background-color 0.25s linear; }
+      #overlay .buttons .button:first-child {
+        margin-right: 5px; }
+      #overlay .buttons .button:last-child {
+        margin-left: 5px; }
+      #overlay .buttons .button.cancel {
+        background-color: #D22042; }
+        #overlay .buttons .button.cancel:hover {
+          color: #D22042;
+          background-color: #fff; }
+      #overlay .buttons .button.accept {
+        background-color: #A3B808; }
+        #overlay .buttons .button.accept:hover {
+          color: #A3B808;
+          background-color: #fff; }
+  #overlay .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: url("../assets/svg/close.svg") center center no-repeat;
+    background-size: contain; }
+
+.body {
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee; }
+  .body.blurry {
+    pointer-events: none;
+    filter: blur(5px);
+    -webkit-filter: blur(5px); }
+    .body.blurry:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 5;
+      content: '';
+      pointer-events: none; }
+  .body h1 {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 5px solid #269ca0;
+    background-color: #30C4C9; }
+    .body h1 span.raspberry-pi-logo:after {
+      width: 30px;
+      height: 30px;
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      background: url("../assets/svg/raspberry-pi-logo.svg") center center no-repeat;
+      background-size: contain; }
+  .body table {
+    width: 100%;
+    padding: 0 20px;
+    font-family: monospace; }
+    .body table thead tr td {
+      width: calc(100% / 4);
+      text-align: center;
+      font-weight: bold;
+      padding-bottom: 10px; }
+    .body table tbody tr td span.action {
+      display: inline-block;
+      padding: 5px;
+      cursor: pointer;
+      color: #FFF;
+      transition: background-color 0.25s linear, color 0.25s linear; }
+      .body table tbody tr td span.action.remove {
+        background-color: #D22042; }
+        .body table tbody tr td span.action.remove:hover {
+          color: #D22042;
+          background-color: #fff; }
+      .body table tbody tr td span.action.add {
+        background-color: #A3B808; }
+        .body table tbody tr td span.action.add:hover {
+          color: #A3B808;
+          background-color: #fff; }
+  .body .split-table-view {
+    width: 50%;
+    height: 100%;
+    float: left; }
+    .body .split-table-view.view-left {
+      background-color: #eeeeee; }
+    .body .split-table-view.view-right {
+      background-color: #d4d4d4; }
+    .body .split-table-view h2 {
+      width: 100%;
+      padding: 10px;
+      color: #3b3b3b; }
+    .body .split-table-view h3 {
+      color: #888888;
+      font-size: 12px;
+      margin-bottom: 15px; }
+      .body .split-table-view h3 span.sync-time {
+        color: #6e6e6e; }
+      .body .split-table-view h3:before {
+        width: 100%;
+        height: 20px;
+        content: '';
+        margin-bottom: 5px;
+        opacity: 0.5;
+        display: block;
+        background: url("../assets/svg/update.svg") center center no-repeat;
+        background-size: contain;
+        animation: rotation 2s linear infinite; }

@@ -1,0 +1,299 @@
+// global variables
+$color-headline-bg: #30C4C9;
+$color-body-bg: rgb(238, 238, 238);
+$color-warning: #D22042;
+$color-okay: #A3B808;
+
+$url-svg-assets: '../assets/svg/';
+$url-asset-update: $url-svg-assets + 'update.svg';
+$url-asset-rpi-logo: $url-svg-assets + 'raspberry-pi-logo.svg';
+$url-asset-close: $url-svg-assets + 'close.svg';
+
+// animations
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// main styling
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+h1, h2, h3, p {
+    color: #FFF;
+    font-family: monospace;
+    text-align: center;
+}
+
+#overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+
+    max-width: 450px;
+
+    padding: 20px;
+
+    display: none;
+
+    transform: translate(-50%, -50%);
+
+    background-color: $color-body-bg;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+
+    &.show {
+        display: block;
+    }
+
+    h1 {
+        color: #000;
+        padding-bottom: 10px;
+    }
+
+    p {
+        color: #000;
+        text-align: left;
+        font-size: 14px;
+
+        span {
+            background-color: darken($color-body-bg, 20%);
+        }
+    }
+
+    .buttons {
+        margin-top: 10px;
+
+        text-align: center;
+
+        .button {
+            min-width: 70px;
+
+            display: inline-block;
+
+            font-family: monospace;
+            color: #FFF;
+
+            cursor: pointer;
+
+            padding: 10px;
+
+            transition: color 0.25s linear, background-color 0.25s linear;
+
+            &:first-child {
+                margin-right: 5px;
+            }
+
+            &:last-child {
+                margin-left: 5px;
+            }
+
+            &.cancel {
+                background-color: $color-warning;
+
+                &:hover {
+                    color: $color-warning;
+                    background-color: #fff;
+                }
+            }
+
+            &.accept {
+                background-color: $color-okay;
+
+                &:hover {
+                    color: $color-okay;
+                    background-color: #fff;
+                }
+            }
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+
+        width: 30px;
+        height: 30px;
+
+        cursor: pointer;
+
+        background: url($url-asset-close) center center no-repeat;
+        background-size: contain;
+    }
+}
+
+.body {
+    width: 100%;
+    height: 100%;
+
+    background-color: $color-body-bg;
+
+    // transition: filter 0.5s linear;
+    // transition: -webkit-filter 0.5s linear;
+
+    &.blurry {
+        pointer-events: none;
+
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+
+            content: '';
+            pointer-events: none;
+        }
+    }
+
+    h1 {
+        width: 100%;
+
+        padding: 20px;
+
+        border-bottom: 5px solid darken($color-headline-bg, 10%);
+
+        background-color: $color-headline-bg;
+
+        span.raspberry-pi-logo:after {
+            width: 30px;
+            height: 30px;
+
+            content: '';
+
+            display: inline-block;
+            vertical-align: middle;
+
+            background: url($url-asset-rpi-logo) center center no-repeat;
+            background-size: contain;
+        }
+    }
+
+    table {
+        width: 100%;
+
+        padding: 0 20px;
+
+        font-family: monospace;
+
+        thead {
+            tr {
+                td {
+                    width: calc(100% / 4);
+
+                    text-align: center;
+                    font-weight: bold;
+
+                    padding-bottom: 10px;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                td {
+                    span.action {
+                        display: inline-block;
+
+                        padding: 5px;
+
+                        cursor: pointer;
+                        color: #FFF;
+
+                        transition: background-color 0.25s linear, color 0.25s linear;
+
+                        &.remove {
+                            background-color: $color-warning;
+
+                            &:hover {
+                                color: $color-warning;
+                                background-color: #fff;
+                            }
+                        }
+
+                        &.add {
+                            background-color: $color-okay;
+
+                            &:hover {
+                                color: $color-okay;
+                                background-color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .split-table-view {
+        width: 50%;
+        height: 100%;
+
+        float: left;
+
+        &.view-left {
+            background-color: $color-body-bg;
+        }
+
+        &.view-right {
+            background-color: darken($color-body-bg, 10%);;
+        }
+
+        h2 {
+            width: 100%;
+
+            padding: 10px;
+
+            color: darken($color-body-bg, 70%);
+        }
+
+        h3 {
+            color: darken($color-body-bg, 40%);
+            font-size: 12px;
+
+            margin-bottom: 15px;
+
+            span.sync-time {
+                color: darken($color-body-bg, 50%);
+            }
+
+            &:before {
+                width: 100%;
+                height: 20px;
+
+                content: '';
+
+                margin-bottom: 5px;
+
+                opacity: 0.5;
+
+                display: block;
+
+                background: url($url-asset-update) center center no-repeat;
+                background-size: contain;
+
+                animation: rotation 2s linear infinite;
+            }
+        }
+    }
+}
