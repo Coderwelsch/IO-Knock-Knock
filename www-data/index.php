@@ -1,3 +1,7 @@
+<?php
+    $pwdFilePath = '.password';
+?>
+
 <html>
     <head>
         <title>Knock Knock</title>
