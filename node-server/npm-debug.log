@@ -4,195 +4,170 @@
 1 verbose cli   'install',
 1 verbose cli   '-g',
 1 verbose cli   'htpasswd' ]
-2 info using npm@2.14.2
-3 info using node@v4.0.0
-4 verbose install initial load of /usr/local/lib/package.json
-5 verbose readDependencies loading dependencies from /usr/local/lib/package.json
-6 silly cache add args [ 'htpasswd', null ]
-7 verbose cache add spec htpasswd
-8 silly cache add parsed spec Result {
-8 silly cache add   raw: 'htpasswd',
-8 silly cache add   scope: null,
-8 silly cache add   name: 'htpasswd',
-8 silly cache add   rawSpec: '',
-8 silly cache add   spec: '*',
-8 silly cache add   type: 'range' }
-9 silly addNamed htpasswd@*
-10 verbose addNamed "*" is a valid semver range for htpasswd
-11 silly addNameRange { name: 'htpasswd', range: '*', hasData: false }
-12 silly mapToRegistry name htpasswd
-13 silly mapToRegistry using default registry
-14 silly mapToRegistry registry https://registry.npmjs.org/
-15 silly mapToRegistry uri https://registry.npmjs.org/htpasswd
-16 verbose addNameRange registry:https://registry.npmjs.org/htpasswd not in flight; fetching
-17 verbose request uri https://registry.npmjs.org/htpasswd
-18 verbose request no auth needed
-19 info attempt registry request try #1 at 4:26:33 PM
-20 verbose request id 6b00d757ddc3ae23
-21 http request GET https://registry.npmjs.org/htpasswd
-22 http 200 https://registry.npmjs.org/htpasswd
-23 silly get cb [ 200,
-23 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-23 silly get     etag: '"EIM7J5G7UPTCPZN78P8GVPH82"',
-23 silly get     'content-type': 'application/json',
-23 silly get     'cache-control': 'max-age=60',
-23 silly get     'content-length': '48288',
-23 silly get     'accept-ranges': 'bytes',
-23 silly get     date: 'Wed, 14 Oct 2015 14:26:33 GMT',
-23 silly get     via: '1.1 varnish',
-23 silly get     age: '0',
-23 silly get     connection: 'keep-alive',
-23 silly get     'x-served-by': 'cache-fra1236-FRA',
-23 silly get     'x-cache': 'HIT',
-23 silly get     'x-cache-hits': '1',
-23 silly get     'x-timer': 'S1444832793.860465,VS0,VE108',
-23 silly get     vary: 'Accept' } ]
-24 verbose get saving htpasswd to /Users/Coderwelsch/.npm/registry.npmjs.org/htpasswd/.cache.json
-25 silly addNameRange number 2 { name: 'htpasswd', range: '*', hasData: true }
-26 silly addNameRange versions [ 'htpasswd',
-26 silly addNameRange   [ '1.0.0',
-26 silly addNameRange     '1.0.1',
-26 silly addNameRange     '1.0.2',
-26 silly addNameRange     '1.0.3',
-26 silly addNameRange     '1.0.4',
-26 silly addNameRange     '1.0.5',
-26 silly addNameRange     '1.0.6',
-26 silly addNameRange     '1.0.7',
-26 silly addNameRange     '1.0.8',
-26 silly addNameRange     '1.0.9',
-26 silly addNameRange     '1.1.0',
-26 silly addNameRange     '1.1.1',
-26 silly addNameRange     '1.1.2',
-26 silly addNameRange     '1.1.3',
-26 silly addNameRange     '2.0.0',
-26 silly addNameRange     '2.0.1',
-26 silly addNameRange     '2.0.2',
-26 silly addNameRange     '2.0.3',
-26 silly addNameRange     '2.0.4',
-26 silly addNameRange     '2.0.5',
-26 silly addNameRange     '2.0.6',
-26 silly addNameRange     '2.0.7',
-26 silly addNameRange     '2.0.8',
-26 silly addNameRange     '2.0.9',
-26 silly addNameRange     '2.1.0',
-26 silly addNameRange     '2.1.1',
-26 silly addNameRange     '2.1.2',
-26 silly addNameRange     '2.1.3',
-26 silly addNameRange     '2.1.4',
-26 silly addNameRange     '2.1.5',
-26 silly addNameRange     '2.1.6',
-26 silly addNameRange     '2.1.7',
-26 silly addNameRange     '2.1.8',
-26 silly addNameRange     '2.2.0',
-26 silly addNameRange     '2.2.1' ] ]
-27 silly addNamed htpasswd@2.2.1
-28 verbose addNamed "2.2.1" is a plain semver version for htpasswd
-29 silly mapToRegistry name htpasswd
-30 silly mapToRegistry using default registry
-31 silly mapToRegistry registry https://registry.npmjs.org/
-32 silly mapToRegistry uri https://registry.npmjs.org/htpasswd
-33 verbose addRemoteTarball https://registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz not in flight; adding
-34 verbose addRemoteTarball [ 'https://registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz',
-34 verbose addRemoteTarball   '318880f4409d21c4ab2906ed140e68f925ae613d' ]
-35 info retry fetch attempt 1 at 4:26:34 PM
-36 info attempt registry request try #1 at 4:26:34 PM
-37 http fetch GET https://registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz
-38 http fetch 200 https://registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz
-39 silly fetchAndShaCheck shasum 318880f4409d21c4ab2906ed140e68f925ae613d
-40 verbose addTmpTarball /var/folders/0n/n5lylfqs7595nlt3m_n1cfx80000gn/T/npm-5055-d410e937/registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz not in flight; adding
-41 verbose addTmpTarball already have metadata; skipping unpack for htpasswd@2.2.1
-42 silly cache afterAdd htpasswd@2.2.1
-43 verbose afterAdd /Users/Coderwelsch/.npm/htpasswd/2.2.1/package/package.json not in flight; writing
-44 verbose afterAdd /Users/Coderwelsch/.npm/htpasswd/2.2.1/package/package.json written
-45 silly install resolved [ { name: 'htpasswd',
-45 silly install resolved     description: 'Node.js package for HTTP Basic Authentication password file utility.',
-45 silly install resolved     version: '2.2.1',
-45 silly install resolved     author: { name: 'Gevorg Harutyunyan', url: 'http://github.com/gevorg' },
-45 silly install resolved     maintainers: [ [Object] ],
-45 silly install resolved     homepage: 'http://github.com/gevorg/htpasswd',
-45 silly install resolved     repository: { type: 'git', url: 'http://github.com/gevorg/htpasswd.git' },
-45 silly install resolved     main: './gensrc/htpasswd.js',
-45 silly install resolved     bin: { htpasswd: './bin/htpasswd' },
-45 silly install resolved     licenses: [ [Object] ],
-45 silly install resolved     bugs: { url: 'http://github.com/gevorg/htpasswd/issues' },
-45 silly install resolved     dependencies:
-45 silly install resolved      { 'apache-md5': '1.0.0',
-45 silly install resolved        commander: '2.0.0',
-45 silly install resolved        prompt: '0.2.11',
-45 silly install resolved        'apache-crypt': '1.0.8' },
-45 silly install resolved     devDependencies: { 'coffee-script': '1.8.0', nodeunit: '0.9.0' },
-45 silly install resolved     engines: { node: '>=0.4.1' },
-45 silly install resolved     scripts:
-45 silly install resolved      { test: 'node ./node_modules/nodeunit/bin/nodeunit tests',
-45 silly install resolved        prepublish: 'rm -rf gensrc && node ./node_modules/coffee-script/bin/coffee --compile -o gensrc src',
-45 silly install resolved        pretest: 'npm run prepublish' },
-45 silly install resolved     keywords:
-45 silly install resolved      [ 'node',
-45 silly install resolved        'htpasswd',
-45 silly install resolved        'http',
-45 silly install resolved        'server',
-45 silly install resolved        'basic',
-45 silly install resolved        'access',
-45 silly install resolved        'authentication' ],
-45 silly install resolved     gitHead: 'c6e58f07c5ebbbfff0cae23a9a22c036f62fd6a3',
-45 silly install resolved     _id: 'htpasswd@2.2.1',
-45 silly install resolved     _shasum: '318880f4409d21c4ab2906ed140e68f925ae613d',
-45 silly install resolved     _from: 'htpasswd@*',
-45 silly install resolved     _npmVersion: '1.4.28',
-45 silly install resolved     _npmUser: { name: 'gevorg', email: 'gevorg.ha@gmail.com' },
-45 silly install resolved     dist:
-45 silly install resolved      { shasum: '318880f4409d21c4ab2906ed140e68f925ae613d',
-45 silly install resolved        tarball: 'http://registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz' },
-45 silly install resolved     directories: {},
-45 silly install resolved     _resolved: 'https://registry.npmjs.org/htpasswd/-/htpasswd-2.2.1.tgz' } ]
-46 info install htpasswd@2.2.1 into /usr/local/lib
-47 info installOne htpasswd@2.2.1
-48 verbose installOne of htpasswd to /usr/local/lib not in flight; installing
-49 verbose lock using /Users/Coderwelsch/.npm/_locks/htpasswd-fae3478573b70d6a.lock for /usr/local/lib/node_modules/htpasswd
-50 silly install write writing htpasswd 2.2.1 to /usr/local/lib/node_modules/htpasswd
-51 verbose unbuild lib/node_modules/htpasswd
-52 silly gentlyRm /usr/local/lib/node_modules/htpasswd is being purged from base /usr/local
-53 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/htpasswd
-54 verbose tar unpack /Users/Coderwelsch/.npm/htpasswd/2.2.1/package.tgz
-55 verbose tar unpacking to /usr/local/lib/node_modules/htpasswd
-56 silly gentlyRm /usr/local/lib/node_modules/htpasswd is being purged
-57 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/htpasswd
-58 silly gunzTarPerm modes [ '755', '644' ]
-59 error tar.unpack untar error /Users/Coderwelsch/.npm/htpasswd/2.2.1/package.tgz
-60 verbose unlock done using /Users/Coderwelsch/.npm/_locks/htpasswd-fae3478573b70d6a.lock for /usr/local/lib/node_modules/htpasswd
-61 verbose fstream_path /usr/local/lib/node_modules/htpasswd
-62 verbose fstream_type Directory
-63 verbose fstream_class DirWriter
-64 verbose stack Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/htpasswd'
-64 verbose stack     at Error (native)
-65 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25
-65 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53
-65 verbose fstream_stack FSReqWrap.oncomplete (fs.js:82:15)
-66 verbose cwd /Users/Coderwelsch/Wichtige Dokumente/FH Potsdam/Projekte/Projektwochen/Johnny Five Is Alive/node-server
-67 error Darwin 15.0.0
-68 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "htpasswd"
-69 error node v4.0.0
-70 error npm  v2.14.2
-71 error path /usr/local/lib/node_modules/htpasswd
-72 error code EACCES
-73 error errno -13
-74 error syscall mkdir
-75 error Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/htpasswd'
-75 error     at Error (native)
-75 error  { [Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/htpasswd']
-75 error   errno: -13,
-75 error   code: 'EACCES',
-75 error   syscall: 'mkdir',
-75 error   path: '/usr/local/lib/node_modules/htpasswd',
-75 error   fstream_type: 'Directory',
-75 error   fstream_path: '/usr/local/lib/node_modules/htpasswd',
-75 error   fstream_class: 'DirWriter',
-75 error   fstream_stack:
-75 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25',
-75 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53',
-75 error      'FSReqWrap.oncomplete (fs.js:82:15)' ] }
-76 error Please try running this command again as root/Administrator.
-77 verbose exit [ -13, true ]
-78 verbose unbuild lib/node_modules/htpasswd
-79 silly gentlyRm /usr/local/lib/node_modules/htpasswd is being purged from base /usr/local
-80 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/htpasswd
+2 info using npm@1.2.14
+3 info using node@v0.10.0
+4 verbose read json /usr/local/lib/package.json
+5 verbose read json /usr/local/lib/package.json
+6 verbose cache add [ 'htpasswd', null ]
+7 verbose cache add name=undefined spec="htpasswd" args=["htpasswd",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'htpasswd',
+8 verbose parsed url   path: 'htpasswd',
+8 verbose parsed url   href: 'htpasswd' }
+9 silly lockFile 1aa5580b-htpasswd htpasswd
+10 verbose lock htpasswd /home/pi/.npm/1aa5580b-htpasswd.lock
+11 silly lockFile 1aa5580b-htpasswd htpasswd
+12 silly lockFile 1aa5580b-htpasswd htpasswd
+13 verbose addNamed [ 'htpasswd', '' ]
+14 verbose addNamed [ null, '' ]
+15 silly lockFile 558f9026-htpasswd htpasswd@
+16 verbose lock htpasswd@ /home/pi/.npm/558f9026-htpasswd.lock
+17 silly addNameRange { name: 'htpasswd', range: '', hasData: false }
+18 verbose url raw htpasswd
+19 verbose url resolving [ 'https://registry.npmjs.org/', './htpasswd' ]
+20 verbose url resolved https://registry.npmjs.org/htpasswd
+21 info trying registry request attempt 1 at 16:42:25
+22 verbose etag "EIM7J5G7UPTCPZN78P8GVPH82"
+23 http GET https://registry.npmjs.org/htpasswd
+24 http 304 https://registry.npmjs.org/htpasswd
+25 silly registry.get cb [ 304,
+25 silly registry.get   { date: 'Wed, 14 Oct 2015 14:42:26 GMT',
+25 silly registry.get     via: '1.1 varnish',
+25 silly registry.get     'cache-control': 'max-age=60',
+25 silly registry.get     etag: '"EIM7J5G7UPTCPZN78P8GVPH82"',
+25 silly registry.get     age: '0',
+25 silly registry.get     connection: 'keep-alive',
+25 silly registry.get     'x-served-by': 'cache-fra1234-FRA',
+25 silly registry.get     'x-cache': 'HIT',
+25 silly registry.get     'x-cache-hits': '1',
+25 silly registry.get     'x-timer': 'S1444833746.001315,VS0,VE111',
+25 silly registry.get     vary: 'Accept' } ]
+26 verbose etag htpasswd from cache
+27 silly addNameRange number 2 { name: 'htpasswd', range: '', hasData: true }
+28 silly addNameRange versions [ 'htpasswd',
+28 silly addNameRange   [ '1.0.0',
+28 silly addNameRange     '1.0.1',
+28 silly addNameRange     '1.0.2',
+28 silly addNameRange     '1.0.3',
+28 silly addNameRange     '1.0.4',
+28 silly addNameRange     '1.0.5',
+28 silly addNameRange     '1.0.6',
+28 silly addNameRange     '1.0.7',
+28 silly addNameRange     '1.0.8',
+28 silly addNameRange     '1.0.9',
+28 silly addNameRange     '1.1.0',
+28 silly addNameRange     '1.1.1',
+28 silly addNameRange     '1.1.2',
+28 silly addNameRange     '1.1.3',
+28 silly addNameRange     '2.0.0',
+28 silly addNameRange     '2.0.1',
+28 silly addNameRange     '2.0.2',
+28 silly addNameRange     '2.0.3',
+28 silly addNameRange     '2.0.4',
+28 silly addNameRange     '2.0.5',
+28 silly addNameRange     '2.0.6',
+28 silly addNameRange     '2.0.7',
+28 silly addNameRange     '2.0.8',
+28 silly addNameRange     '2.0.9',
+28 silly addNameRange     '2.1.0',
+28 silly addNameRange     '2.1.1',
+28 silly addNameRange     '2.1.2',
+28 silly addNameRange     '2.1.3',
+28 silly addNameRange     '2.1.4',
+28 silly addNameRange     '2.1.5',
+28 silly addNameRange     '2.1.6',
+28 silly addNameRange     '2.1.7',
+28 silly addNameRange     '2.1.8',
+28 silly addNameRange     '2.2.0',
+28 silly addNameRange     '2.2.1' ] ]
+29 verbose addNamed [ 'htpasswd', '2.2.1' ]
+30 verbose addNamed [ '2.2.1', '2.2.1' ]
+31 silly lockFile 08b8a537-htpasswd-2-2-1 htpasswd@2.2.1
+32 verbose lock htpasswd@2.2.1 /home/pi/.npm/08b8a537-htpasswd-2-2-1.lock
+33 verbose read json /home/pi/.npm/htpasswd/2.2.1/package/package.json
+34 silly lockFile 08b8a537-htpasswd-2-2-1 htpasswd@2.2.1
+35 silly lockFile 08b8a537-htpasswd-2-2-1 htpasswd@2.2.1
+36 silly lockFile 558f9026-htpasswd htpasswd@
+37 silly lockFile 558f9026-htpasswd htpasswd@
+38 silly resolved [ { name: 'htpasswd',
+38 silly resolved     description: 'Node.js package for HTTP Basic Authentication password file utility.',
+38 silly resolved     version: '2.2.1',
+38 silly resolved     author: { name: 'Gevorg Harutyunyan', url: 'http://github.com/gevorg' },
+38 silly resolved     maintainers: [ [Object] ],
+38 silly resolved     homepage: 'http://github.com/gevorg/htpasswd',
+38 silly resolved     repository: { type: 'git', url: 'http://github.com/gevorg/htpasswd.git' },
+38 silly resolved     main: './gensrc/htpasswd.js',
+38 silly resolved     bin: { htpasswd: './bin/htpasswd' },
+38 silly resolved     licenses: [ [Object] ],
+38 silly resolved     bugs: { url: 'http://github.com/gevorg/htpasswd/issues' },
+38 silly resolved     dependencies:
+38 silly resolved      { 'apache-md5': '1.0.0',
+38 silly resolved        commander: '2.0.0',
+38 silly resolved        prompt: '0.2.11',
+38 silly resolved        'apache-crypt': '1.0.8' },
+38 silly resolved     devDependencies: { 'coffee-script': '1.8.0', nodeunit: '0.9.0' },
+38 silly resolved     engines: { node: '>=0.4.1' },
+38 silly resolved     scripts:
+38 silly resolved      { test: 'node ./node_modules/nodeunit/bin/nodeunit tests',
+38 silly resolved        prepublish: 'rm -rf gensrc && node ./node_modules/coffee-script/bin/coffee --compile -o gensrc src',
+38 silly resolved        pretest: 'npm run prepublish' },
+38 silly resolved     keywords:
+38 silly resolved      [ 'node',
+38 silly resolved        'htpasswd',
+38 silly resolved        'http',
+38 silly resolved        'server',
+38 silly resolved        'basic',
+38 silly resolved        'access',
+38 silly resolved        'authentication' ],
+38 silly resolved     readme: '# htpasswd\n[Node.js](http://nodejs.org/) package for HTTP Basic Authentication password file utility.\n\n[![Build Status](https://api.travis-ci.org/gevorg/htpasswd.png)](https://travis-ci.org/gevorg/htpasswd)\n[![Dependency Status](https://david-dm.org/gevorg/htpasswd.png)](https://david-dm.org/gevorg/htpasswd)\n\n## Installation\n\nVia git (or downloaded tarball):\n\n```bash\n$ git clone git://github.com/gevorg/htpasswd.git\n```\nVia [npm](http://npmjs.org/):\n\n```bash\n$ npm install -g htpasswd\n```\t\n## Usage\n\n```bash\n$ htpasswd [-cimpsDv] passwordfile username\n$ htpasswd -b[cmpsDv] passwordfile username password\n\n$ htpasswd -n[imps] username\n$ htpasswd -nb[mps] username password\n```\t\n\n## Options\n\n - `-b` - Use the password from the command line rather than prompting for it. This option should be used with extreme care, since the password is clearly visible on the command line. For script use see the -i option.\n - `-i` - Read the password from stdin without verification (for script usage).\n - `-c` - Create a new file.\n - `-n` - Don\'t update file; display results on stdout.\n - `-m` - Use MD5 encryption for passwords. This is the default.\n - `-d` - Use crypt() encryption for passwords. This algorithm limits the password length to 8 characters. This algorithm is insecure by today\'s standards.\n - `-s` - Use SHA encryption for passwords. This algorithm is insecure by today\'s standards.\n - `-p` - Do not encrypt the password (plaintext).\n - `-D` - Delete the specified user.\n - `-v` - Verify password. Verify that the given password matches the password of the user stored in the specified htpasswd file.\n\n## Running tests\n\nIt uses [nodeunit](https://github.com/caolan/nodeunit/), so just run following command in package directory:\n\n```bash\n$ npm test\n```\n\n## Issues\n\nYou can find list of issues using **[this link](http://github.com/gevorg/htpasswd/issues)**.\n\n## Requirements\n\n - **[Node.js](http://nodejs.org)** - Event-driven I/O server-side JavaScript       environment based on V8.\n - **[npm](http://npmjs.org)** - Package manager. Installs, publishes and manages   node programs.\n\n## Dependencies\n\n - **[commander](https://github.com/visionmedia/commander.js/)** - node.js command-line interfaces made easy.\n - **[coffee-script](http://coffeescript.org/)** - CoffeeScript is a little language that compiles into JavaScript.\n - **[prompt](https://github.com/flatiron/prompt)** - a beautiful command-line prompt for node.js.\n - **[apache-md5](https://github.com/gevorg/apache-md5)** - Node.js module for Apache style password encryption using md5.\n - **[apache-crypt](https://github.com/gevorg/apache-crypt)** - Node.js module for Apache style password encryption using crypt(3).\n\n## Development dependencies\n\n - **[nodeunit](https://github.com/caolan/nodeunit/)** - Easy unit testing in node.js and the browser, based on the assert module.\n\n## License\n\nThe MIT License (MIT)\n\nCopyright (c) 2015 Gevorg Harutyunyan\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the "Software"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+38 silly resolved     readmeFilename: 'README.md',
+38 silly resolved     _id: 'htpasswd@2.2.1',
+38 silly resolved     _from: 'htpasswd@' } ]
+39 info install htpasswd@2.2.1 into /usr/local/lib
+40 info installOne htpasswd@2.2.1
+41 verbose from cache /home/pi/.npm/htpasswd/2.2.1/package/package.json
+42 info /usr/local/lib/node_modules/htpasswd unbuild
+43 verbose read json /usr/local/lib/node_modules/htpasswd/package.json
+44 verbose tar unpack /home/pi/.npm/htpasswd/2.2.1/package.tgz
+45 silly lockFile fae34785--local-lib-node-modules-htpasswd /usr/local/lib/node_modules/htpasswd
+46 verbose lock /usr/local/lib/node_modules/htpasswd /home/pi/.npm/fae34785--local-lib-node-modules-htpasswd.lock
+47 silly lockFile ed4dedea-i-npm-htpasswd-2-2-1-package-tgz /home/pi/.npm/htpasswd/2.2.1/package.tgz
+48 verbose lock /home/pi/.npm/htpasswd/2.2.1/package.tgz /home/pi/.npm/ed4dedea-i-npm-htpasswd-2-2-1-package-tgz.lock
+49 silly gunzTarPerm modes [ '755', '644' ]
+50 error Error: EACCES, mkdir '/usr/local/lib/node_modules/htpasswd'
+50 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/htpasswd']
+50 error   errno: 3,
+50 error   code: 'EACCES',
+50 error   path: '/usr/local/lib/node_modules/htpasswd',
+50 error   fstream_type: 'Directory',
+50 error   fstream_path: '/usr/local/lib/node_modules/htpasswd',
+50 error   fstream_class: 'DirWriter',
+50 error   fstream_stack:
+50 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+50 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53',
+50 error      'Object.oncomplete (fs.js:93:15)' ] }
+51 error Please try running this command again as root/Administrator.
+52 error System Linux 3.12.26-rpi-aufs
+53 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "htpasswd"
+54 error cwd /home/pi/knock-knock/node-server
+55 error node -v v0.10.0
+56 error npm -v 1.2.14
+57 error path /usr/local/lib/node_modules/htpasswd
+58 error fstream_path /usr/local/lib/node_modules/htpasswd
+59 error fstream_type Directory
+60 error fstream_class DirWriter
+61 error code EACCES
+62 error errno 3
+63 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/htpasswd'
+64 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+64 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:37:53
+64 error fstream_stack Object.oncomplete (fs.js:93:15)
+65 verbose exit [ 3, true ]

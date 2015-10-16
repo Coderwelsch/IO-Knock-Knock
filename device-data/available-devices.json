@@ -2,7 +2,21 @@
     {
         "address": "80:BE:05:7C:14:09", 
         "name": "Josephs iPhone", 
-        "status": "1", 
-        "time": "2015-10-14 12:48:31.418231"
+        "status": "0", 
+        "time": "2015-10-12 12:09:38.324522"
+    }, 
+    {
+        "address": "FA:0D:46:66:28:75", 
+        "name": "CUBOT GT99", 
+        "status": "0", 
+        "time": "2015-10-16 10:09:14.840940", 
+        "type": "add"
+    }, 
+    {
+        "address": "B8:E8:56:2A:95:FF", 
+        "name": "Lucas Vogel", 
+        "status": "0", 
+        "time": "2015-10-16 10:13:31.053801", 
+        "type": "add"
     }
 ]

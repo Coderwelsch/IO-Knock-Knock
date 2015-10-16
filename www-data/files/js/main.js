@@ -81,6 +81,7 @@ function addItemClicked( event ) {
     stopDataRequesting();
     addOverlay( 'add', searchedDeviceData[ index ] );
 }
+
 function addOverlay( type, deviceData ) {
     var data = {
         remove: {
@@ -111,15 +112,19 @@ function addOverlay( type, deviceData ) {
 }
 
 function applyData( type, data ) {
-    $.ajax({
-        type: "POST",
-        url: "http://knock-knock-pi.local/setJsonData",
+    data[ 'type' ] = type;
+
+    $.ajax( {
+        type: "GET",
+        url: "http://knock-knock-pi.local:8080/setJsonData",
         data: data,
         success: function( data ) {
-            console.log(data);
+            if ( data === 'OK' ) {
+                overlayCloseClicked();
+            }
         },
         dataType: 'text'
-    });
+    } );
 }
 
 function overlayCloseClicked() {
