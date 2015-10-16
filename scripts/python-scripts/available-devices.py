@@ -10,8 +10,9 @@ import os
 currentAbsolutePath = str( os.path.dirname(__file__) );
 if currentAbsolutePath:
     currentAbsolutePath += '/'
-jsonPathToAuthedDevices = os.path.join( currentAbsolutePath, '../device-data/authorized-devices.json' )
-jsonPathToAvailableDevices = os.path.join( currentAbsolutePath, '../device-data/available-devices.json' )
+arduinoCommScriptPath = os.path.join( currentAbsolutePath, 'arduino-communication.py' )
+jsonPathToAuthedDevices = os.path.join( currentAbsolutePath, '../../device-data/authorized-devices.json' )
+jsonPathToAvailableDevices = os.path.join( currentAbsolutePath, '../../device-data/available-devices.json' )
 
 # check devices for availabillity
 while True:
@@ -28,7 +29,7 @@ while True:
 
         if ( result != None ):
             item[ 'status' ] = '1'
-            print( item[ 'name' ] + ' is available' )
+            # print( item[ 'name' ] + ' is available' )
 
             deviceFound = True
 
@@ -36,16 +37,16 @@ while True:
             item[ 'time' ] = str( datetime.datetime.now() )
         else:
             item[ 'status' ] = '0'
-            print( item[ 'name' ] + ' is not available' )
+            # print( item[ 'name' ] + ' is not available' )
 
         # add to export json file object
         deviceStatusData.append( item )
 
     # if a device is available open or close the door
     if deviceFound:
-        os.system( 'sudo python arduino-communication.py ON' )
+        os.system( 'sudo python ' + arduinoCommScriptPath + ' ON' )
     else:
-        os.system( 'sudo python arduino-communication.py OFF' )
+        os.system( 'sudo python ' + arduinoCommScriptPath + ' OFF' )
 
     # write / update available data file
     with open( jsonPathToAvailableDevices, 'w+' ) as writeFile:

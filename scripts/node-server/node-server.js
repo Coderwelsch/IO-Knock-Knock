@@ -1,5 +1,5 @@
 // global variables
-var sys = require("sys"),
+var sys = require("util"),
     http = require("http"),
     path = require("path"),
     url = require("url"),
@@ -8,33 +8,7 @@ var sys = require("sys"),
     qs = require("querystring"),
     childProcess = require('child_process'),
 
-    mimeTypes = {
-        "ecma": "application/ecmascript",
-        "epub": "application/epub+zip",
-        "js": "application/javascript",
-        "json": "application/json",
-        "doc": "application/msword",
-        "pdf": "application/pdf",
-        "cer": "application/pkix-cert",
-        "rss": "application/rss+xml",
-        "rtf": "application/rtf",
-        "xhtml": "application/xhtml+xml",
-        "xml": "application/xml",
-        "zip": "application/zip",
-        "bmp": "image/bmp",
-        "gif": "image/gif",
-        "jpg": "image/jpeg",
-        "png": "image/png",
-        "svg": "image/svg+xml",
-        "tiff": "image/tiff",
-        "css": "text/css",
-        "csv": "text/csv",
-        "html": "text/html",
-        "txt": "text/plain",
-        "uri": "text/uri-list",
-        "mp4": "video/mp4",
-        "mpg": "video/mpeg"
-    },
+    mimeTypes = require('./mime-types'),
 
     server,
     webSocketConnection,
@@ -42,10 +16,12 @@ var sys = require("sys"),
 
     requestCallbackForSearchedDevices = '/newDevicesFound'
 
-    rootDir = "/home/pi/knock-knock/www-data/",
-    availableDevicesJson = "../device-data/available-devices.json",
-    authorizedDevicesJson = "../device-data/authorized-devices.json",
-    searchedDevicesJson = "../device-data/searched-devices.json",
+    rootDir = process.cwd() + '/',
+    wwwDir = rootDir + 'www-data/', 
+    dataDir = rootDir + "../../device-data/",
+    availableDevicesJson = dataDir + "available-devices.json",
+    authorizedDevicesJson = dataDir + "authorized-devices.json",
+    searchedDevicesJson = dataDir + "searched-devices.json",
     indexLocation = "index.html";
 
 
@@ -122,8 +98,6 @@ function removeAuthorizedDeviceOfDataJson ( macAddress ) {
         for ( var i = 0; i < jsonData.length; i++ ) {
             var item = jsonData[ i ];
 
-            console.log( 'ITEM: ', item );
-
             if ( item.address === macAddress ) {
                 entryFound = true;
 
@@ -151,15 +125,13 @@ function removeAuthorizedDeviceOfDataJson ( macAddress ) {
 // start http server
 server = http.createServer( function( request, response ) {
     var requestedPath = url.parse( request.url ).pathname,
-        fullPath = path.join( rootDir, requestedPath ),
+        fullPath = path.join( wwwDir, requestedPath ),
         urlParams = ( url.parse( request.url, true ) ).query;
 
     // extend headers
     response = setCORSHeaders( response );
 
     if ( requestedPath.indexOf( '/setJsonData' ) >= 0 ) {
-        console.log( 'Get URL Params: ', urlParams );
-
         if ( urlParams.type === 'add' ) {
             addDeviceToAuthorizedDataJson( urlParams );
         } else if ( urlParams.type === 'remove' ) {
@@ -168,7 +140,7 @@ server = http.createServer( function( request, response ) {
             console.log( 'Unknow Data Command Found: ', urlParams.type );
         }
 
-        response.writeHeader( 200, { "Content-Type": "application/json" } );
+        response.writeHeader( 200, { "Content-Type": mimeTypes[ 'txt' ] } );
         response.write( 'OK' );
         response.end();
 
@@ -181,7 +153,7 @@ server = http.createServer( function( request, response ) {
             getJSON( availableDevicesJson, function( data ) {
                 data[ 'type' ] = 'auth-devices';
 
-                response.writeHeader( 200, { "Content-Type": "application/json" } );
+                response.writeHeader( 200, { "Content-Type": mimeTypes[ 'json' ] } );
                 response.write( JSON.stringify( data ) );
                 response.end();
             } );
@@ -191,7 +163,7 @@ server = http.createServer( function( request, response ) {
             getJSON( searchedDevicesJson, function ( data ) {
                 data[ 'type' ] = 'auth-devices';
 
-                response.writeHeader( 200, { "Content-Type": "application/json" } );
+                response.writeHeader( 200, { "Content-Type": mimeTypes[ 'json' ] } );
                 response.write( JSON.stringify( data ) );
                 response.end();
             } );
@@ -217,19 +189,19 @@ server = http.createServer( function( request, response ) {
             // search for requested file
             filesys.exists( fullPath, function( exists ) {
                 if ( !exists ) {
-                    response.writeHeader( 404, { "Content-Type": "text/plain" } );
-                    response.write( "404 Not Found\n" );
+                    response.writeHeader( 404, { "Content-Type": mimeTypes[ 'txt' ] } );
+                    response.write( "404 File Not Found:" + fullPath );
                     response.end();
                 } else {
                     filesys.readFile( fullPath, "binary", function ( err, file ) {
                         if ( err ) {
-                            response.writeHeader( 500, { "Content-Type": "text/plain" } );
+                            response.writeHeader( 500, { "Content-Type": mimeTypes[ 'txt' ] } );
                             response.write( err + "\n" );
                             response.end();
                         } else {
                             var extention = path.extname( fullPath ).split( '.' )[ 1 ],
-                                mimeType = getMimeType( extention ),
-                                headerSettings = { 'Content-Type': mimeType };
+                                tmpMimeType = getMimeType( extention ),
+                                headerSettings = { 'Content-Type': tmpMimeType };
 
                             response.writeHeader( 200, headerSettings );
                             response.write( file, "binary" );

@@ -19,7 +19,7 @@ currentAbsolutePath = currentDir
 if currentDir:
     currentAbsolutePath += '/'
 
-jsonExportPath = os.path.join( currentAbsolutePath, '../device-data/searched-devices.json' )
+jsonExportPath = os.path.join( currentAbsolutePath, '../../device-data/searched-devices.json' )
 
 foundDevices = {}
 hciCommand = 'sudo hcitool scan'.split()
@@ -57,7 +57,7 @@ def searchForDevices():
             # save found device data to object
             foundDevices[ macAddr ] = deviceData
             exportDevices.append( deviceData )
-            print( 'Found Device: ' + macAddr + ' - ' + deviceName )
+            # print( 'Found Device: ' + macAddr + ' - ' + deviceName )
 
     # save new device data to json
     with open( jsonExportPath, 'w+' ) as outfile:
@@ -68,8 +68,8 @@ def searchForDevices():
     #
     #
 
-    if not foundSomething:
-        print( 'No Device Found!' )
+    # if not foundSomething:
+        # print( 'No Device Found!' )
 
     # after search is done wait 4 seconds and do a function recall
     time.sleep( 4 )
