@@ -1,5 +1,32 @@
 <?php
-    $pwdFilePath = '.password';
+    // main config
+    session_start();
+
+    if ( $_GET[ 'logout' ] ) {
+        session_destroy();
+    } else {
+        // main variables
+        $pwdFilePath = '.password';
+        $pwd = '';
+
+        $userPwd = $_POST[ 'password' ];
+        $md5UserPwd = md5( $userPwd );
+
+        $userIsLoggedIn = $_SESSION[ 'login' ];
+
+        //
+        if ( file_exists( $pwdFilePath ) ) {
+            $pwd = file_get_contents( $pwdFilePath );
+
+            if ( strcmp( $pwd, $md5UserPwd ) || $userIsLoggedIn ) {
+                $userIsLoggedIn = true;
+            } else {
+                $userIsLoggedIn = false;
+            }
+        }
+
+        $_SESSION[ 'login' ] = $userIsLoggedIn;
+    }
 ?>
 
 <html>
@@ -12,7 +39,7 @@
     </head>
 
     <body>
-        <div id="overlay">
+        <div id="overlay-device-manager">
             <div class="close"></div>
 
             <h1 class="headline">Lorem Ipsum</h1>
@@ -34,8 +61,23 @@
             </div>
         </div>
 
+        <div id="login-form">
+            <div class="close"></div>
+
+            <h1 class="headline">Login</h1>
+
+            <form action="index.php" method="post">
+                <p>
+                    Your Password:
+                </p>
+                <input type="password" name="password" value="" />
+            </form>
+        </div>
+
         <div class="body">
             <h1>Knock Knock <span class="raspberry-pi-logo"></span></h1>
+
+            <div class="login-button <?php if ( $userIsLoggedIn ) { echo( "logged-in" ); } else { echo( 'log-in' );} ?>"></div>
 
             <div class="split-table-view view-left">
                 <h2>Authorized Devices</h2>

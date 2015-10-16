@@ -6,8 +6,9 @@ var requiredScripts = [
     webSocket,
     wsUrl = 'ws://knock-knock-pi.local:8081',
 
-    getAuthJsonUrl = 'http://knock-knock-pi.local:8080/getJsonData=auth-dev',
-    getSearchJsonUrl = 'http://knock-knock-pi.local:8080/getJsonData=searched-dev',
+    getAuthJsonUrl = 'files/php/get-available-device-data.php',
+    getSearchJsonUrl = 'files/php/get-searched-device-data.php',
+    removeJsonUrl = 'files/php/remove-auth-device-data.php',
 
     authDeviceData = {},
     searchedDeviceData = {},
@@ -18,8 +19,10 @@ var requiredScripts = [
     searchedActions = { label: 'Add', class: 'add' },
     authActions = { label: 'Remove', class: 'remove' },
 
-    $overlay,
+    $overlayDeviceManager,
+    $overlayLogin,
     $body,
+    $loginBtn,
     $authDeviceView,
     $searchedDeviceView,
     $searchedLastSyncTime,
@@ -39,8 +42,10 @@ function init() {
 function initVariables() {
     webSocket = new WebSocket( wsUrl );
 
-    $overlay = $( '#overlay' );
+    $overlayDeviceManager = $( '#overlay-device-manager' );
+    $overlayLogin = $( '#login-form' );
     $body = $( '.body' );
+    $loginBtn = $body.find( '.login-button' );
     $authDeviceView = $body.find( '.split-table-view.view-left' );
     $searchedDeviceView = $body.find( '.split-table-view.view-right' );
     $searchedDeviceTable = $searchedDeviceView.find( 'table.device-table' );
@@ -58,6 +63,28 @@ function bindEvents() {
 
     $authDeviceTableBody.on( 'click', 'span.action.remove', removeItemClicked );
     $searchedDeviceTableBody.on( 'click', 'span.action.add', addItemClicked );
+
+    if ( $loginBtn.hasClass( 'log-in' ) ) {
+        $loginBtn.on( 'click', loginBtnClicked );
+    } else {
+        $loginBtn.on( 'click', logOut );
+    }
+}
+
+function logOut() {
+    window.location.href = 'index.php?logout=true'
+}
+
+function loginBtnClicked( event ) {
+    $overlayLogin.addClass( 'show' );
+    $body.addClass( 'blurry' );
+
+    $overlayLogin.find( 'input' ).focus();
+
+    $overlayLogin.one( 'click', '.close', function () {
+        $body.removeClass( 'blurry' );
+        $overlayLogin.removeClass( 'show' );
+    } );
 }
 
 function main() {
@@ -96,17 +123,17 @@ function addOverlay( type, deviceData ) {
         }
     };
 
-    $overlay.addClass( 'show' );
+    $overlayDeviceManager.addClass( 'show' );
     $body.addClass( 'blurry' );
 
-    $overlay.find( '.headline' ).text( data[ type ].headline );
-    $overlay.find( '.action' ).text( data[ type ].action );
-    $overlay.find( '.name' ).text( deviceData.name );
-    $overlay.find( '.address' ).text( deviceData.address );
-    $overlay.find( '.target-list' ).text( data[ type ].target );
+    $overlayDeviceManager.find( '.headline' ).text( data[ type ].headline );
+    $overlayDeviceManager.find( '.action' ).text( data[ type ].action );
+    $overlayDeviceManager.find( '.name' ).text( deviceData.name );
+    $overlayDeviceManager.find( '.address' ).text( deviceData.address );
+    $overlayDeviceManager.find( '.target-list' ).text( data[ type ].target );
 
-    $overlay.one( 'click', '.close, .button.cancel', overlayCloseClicked );
-    $overlay.one( 'click', '.button.accept', function () {
+    $overlayDeviceManager.one( 'click', '.close, .button.cancel', overlayCloseClicked );
+    $overlayDeviceManager.one( 'click', '.button.accept', function () {
         applyData( type, deviceData );
     } );
 }
@@ -115,20 +142,23 @@ function applyData( type, data ) {
     data[ 'type' ] = type;
 
     $.ajax( {
-        type: "GET",
-        url: "http://knock-knock-pi.local:8080/setJsonData",
+        type: "POST",
+        url: removeJsonUrl,
         data: data,
         success: function( data ) {
-            if ( data === 'OK' ) {
+
+            if ( data.success ) {
                 overlayCloseClicked();
+            } else {
+                console.log( 'ERROR: ', data.error );
             }
         },
-        dataType: 'text'
+        dataType: 'json'
     } );
 }
 
 function overlayCloseClicked() {
-    $overlay.removeClass( 'show' );
+    $overlayDeviceManager.removeClass( 'show' );
     $body.removeClass( 'blurry' );
     startDataRequesting();
 }

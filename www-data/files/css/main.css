@@ -17,7 +17,7 @@ h1, h2, h3, p {
   font-family: monospace;
   text-align: center; }
 
-#overlay {
+#overlay-device-manager, #login-form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -28,21 +28,29 @@ h1, h2, h3, p {
   transform: translate(-50%, -50%);
   background-color: #eeeeee;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
-  #overlay.show {
+  #overlay-device-manager.show, #login-form.show {
     display: block; }
-  #overlay h1 {
+  #overlay-device-manager h1, #login-form h1 {
     color: #000;
     padding-bottom: 10px; }
-  #overlay p {
+  #overlay-device-manager form p, #login-form form p {
+    padding-bottom: 10px;
+    color: #888888; }
+  #overlay-device-manager input, #login-form input {
+    min-width: 200px;
+    padding: 5px;
+    border: none;
+    outline: none; }
+  #overlay-device-manager p, #login-form p {
     color: #000;
     text-align: left;
     font-size: 14px; }
-    #overlay p span {
+    #overlay-device-manager p span, #login-form p span {
       background-color: #bbbbbb; }
-  #overlay .buttons {
+  #overlay-device-manager .buttons, #login-form .buttons {
     margin-top: 10px;
     text-align: center; }
-    #overlay .buttons .button {
+    #overlay-device-manager .buttons .button, #login-form .buttons .button {
       min-width: 70px;
       display: inline-block;
       font-family: monospace;
@@ -50,21 +58,21 @@ h1, h2, h3, p {
       cursor: pointer;
       padding: 10px;
       transition: color 0.25s linear, background-color 0.25s linear; }
-      #overlay .buttons .button:first-child {
+      #overlay-device-manager .buttons .button:first-child, #login-form .buttons .button:first-child {
         margin-right: 5px; }
-      #overlay .buttons .button:last-child {
+      #overlay-device-manager .buttons .button:last-child, #login-form .buttons .button:last-child {
         margin-left: 5px; }
-      #overlay .buttons .button.cancel {
+      #overlay-device-manager .buttons .button.cancel, #login-form .buttons .button.cancel {
         background-color: #D22042; }
-        #overlay .buttons .button.cancel:hover {
+        #overlay-device-manager .buttons .button.cancel:hover, #login-form .buttons .button.cancel:hover {
           color: #D22042;
           background-color: #fff; }
-      #overlay .buttons .button.accept {
+      #overlay-device-manager .buttons .button.accept, #login-form .buttons .button.accept {
         background-color: #A3B808; }
-        #overlay .buttons .button.accept:hover {
+        #overlay-device-manager .buttons .button.accept:hover, #login-form .buttons .button.accept:hover {
           color: #A3B808;
           background-color: #fff; }
-  #overlay .close {
+  #overlay-device-manager .close, #login-form .close {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -129,6 +137,22 @@ h1, h2, h3, p {
         .body table tbody tr td span.action.add:hover {
           color: #A3B808;
           background-color: #fff; }
+  .body .login-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    margin-top: 9px;
+    margin-right: 9px;
+    opacity: 0.5;
+    cursor: pointer;
+    background: url("../assets/svg/login.svg") center center no-repeat;
+    background-size: 60%; }
+    .body .login-button:hover {
+      opacity: 1; }
+    .body .login-button.logged-in {
+      background-color: #D22042; }
   .body .split-table-view {
     width: 50%;
     height: 100%;

@@ -8,6 +8,7 @@ $url-svg-assets: '../assets/svg/';
 $url-asset-update: $url-svg-assets + 'update.svg';
 $url-asset-rpi-logo: $url-svg-assets + 'raspberry-pi-logo.svg';
 $url-asset-close: $url-svg-assets + 'close.svg';
+$url-asset-login: $url-svg-assets + 'login.svg';
 
 // animations
 @keyframes rotation {
@@ -39,7 +40,7 @@ h1, h2, h3, p {
     text-align: center;
 }
 
-#overlay {
+#overlay-device-manager, #login-form {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -64,6 +65,24 @@ h1, h2, h3, p {
     h1 {
         color: #000;
         padding-bottom: 10px;
+    }
+
+    form {
+        p {
+            padding-bottom: 10px;
+
+            color: darken($color-body-bg, 40%);
+        }
+    }
+
+    input {
+        min-width: 200px;
+
+        padding: 5px;
+
+        border: none;
+
+        outline: none;
     }
 
     p {
@@ -242,6 +261,33 @@ h1, h2, h3, p {
                     }
                 }
             }
+        }
+    }
+
+    .login-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 50px;
+        height: 50px;
+
+        margin-top: 9px;
+        margin-right: 9px;
+
+        opacity: 0.5;
+
+        cursor: pointer;
+
+        background: url($url-asset-login) center center no-repeat;
+        background-size: 60%;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.logged-in {
+            background-color: $color-warning;
         }
     }
 
