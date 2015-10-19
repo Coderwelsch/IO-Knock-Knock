@@ -13,11 +13,19 @@ var requiredScripts = [
     authDeviceData = {},
     searchedDeviceData = {},
     authLastSyncTime = Date.now(),
-    authInterval = 0,
-    searchedInterval = 0,
 
     searchedActions = { label: 'Add', class: 'add' },
     authActions = { label: 'Remove', class: 'remove' },
+    overlayData = {
+        remove: {
+            headline: 'Remove Device !?',
+            action: 'remove',
+            target: 'authentificated' },
+        add: {
+            headline: 'Add Device !?',
+            action: 'add',
+            target: 'authentificated' }
+    },
 
     $overlayDeviceManager,
     $overlayLogin,
@@ -60,6 +68,8 @@ function initVariables() {
 
 function bindEvents() {
     webSocket.onmessage = receivedMessageFromServer;
+    WebSocket.onerror = webSocketError;
+    WebSocket.onclose = webSocketClosed;
 
     $authDeviceTableBody.on( 'click', 'span.action.remove', removeItemClicked );
     $searchedDeviceTableBody.on( 'click', 'span.action.add', addItemClicked );
@@ -88,7 +98,7 @@ function loginBtnClicked( event ) {
 }
 
 function main() {
-    startDataRequesting();
+    requestInitialData();
 }
 
 function removeItemClicked( event ) {
@@ -96,7 +106,6 @@ function removeItemClicked( event ) {
         $row = $this.closest( 'tr' ),
         index = parseInt( $row.attr( 'data-index' ) );
 
-    stopDataRequesting();
     addOverlay( 'remove', authDeviceData[ index ] );
 }
 
@@ -105,32 +114,18 @@ function addItemClicked( event ) {
         $row = $this.closest( 'tr' ),
         index = parseInt( $row.attr( 'data-index' ) );
 
-    stopDataRequesting();
     addOverlay( 'add', searchedDeviceData[ index ] );
 }
 
 function addOverlay( type, deviceData ) {
-    var data = {
-        remove: {
-            headline: 'Remove Device !?',
-            action: 'remove',
-            target: 'authentificated'
-        },
-        add: {
-            headline: 'Add Device !?',
-            action: 'add',
-            target: 'authentificated'
-        }
-    };
-
     $overlayDeviceManager.addClass( 'show' );
     $body.addClass( 'blurry' );
 
-    $overlayDeviceManager.find( '.headline' ).text( data[ type ].headline );
-    $overlayDeviceManager.find( '.action' ).text( data[ type ].action );
+    $overlayDeviceManager.find( '.headline' ).text( overlayData[ type ].headline );
+    $overlayDeviceManager.find( '.action' ).text( overlayData[ type ].action );
     $overlayDeviceManager.find( '.name' ).text( deviceData.name );
     $overlayDeviceManager.find( '.address' ).text( deviceData.address );
-    $overlayDeviceManager.find( '.target-list' ).text( data[ type ].target );
+    $overlayDeviceManager.find( '.target-list' ).text( overlayData[ type ].target );
 
     $overlayDeviceManager.one( 'click', '.close, .button.cancel', overlayCloseClicked );
     $overlayDeviceManager.one( 'click', '.button.accept', function () {
@@ -160,29 +155,19 @@ function applyData( type, data ) {
 function overlayCloseClicked() {
     $overlayDeviceManager.removeClass( 'show' );
     $body.removeClass( 'blurry' );
-    startDataRequesting();
 }
 
-function stopDataRequesting() {
-    clearInterval( authInterval );
-    clearInterval( searchedInterval );
-}
-
-function startDataRequesting() {
+function requestInitialData() {
     getAuthJsonData();
     getSearchedJsonData();
 }
 
 function getAuthJsonData() {
-    authInterval = setInterval( function () {
-        $.getJSON( getAuthJsonUrl, updateAuthDevices );
-    }, 4000 );
+    $.getJSON( getAuthJsonUrl, updateAuthDevices );
 }
 
 function getSearchedJsonData( data ) {
-    searchedInterval = setInterval( function () {
-        $.getJSON( getSearchJsonUrl, updateSearchedDevices );
-    }, 4000 );
+    $.getJSON( getSearchJsonUrl, updateSearchedDevices );
 }
 
 function updateTableData( data, $tableBody, $syncTime, action ) {
@@ -255,6 +240,15 @@ function updateAuthDevices( data ) {
     updateTableData( authDeviceData, $authDeviceTableBody, $authLastSyncTime, authActions );
 }
 
+// web socket
+function webSocketError ( error ) {
+    console.error( error );
+}
+
+function webSocketClosed( msg ) {
+    console.log( msg );
+}
+
 function receivedMessageFromServer( message ) {
     var messageData = JSON.parse( message.data );
 
@@ -263,16 +257,17 @@ function receivedMessageFromServer( message ) {
             updateAuthDevices( messageData );
         break;
 
-        // TODO: Implement WebSocket Callbacks the right way
         case 'searched-devices':
+            updateSearchedDevices( messageData );
+        break;
+
         default:
-            // updateSearchedDevices( messageData );
-            // console.log( messageData );
-            // console.log( 'WebSocket: Unknown Data Type Received:', messageData );
+            console.log( 'WebSocket: Unknown Data Type Received:', messageData );
         break;
     }
 }
 
+// require error
 function error( errorMsg ) {
     console.error( errorMsg );
 }
