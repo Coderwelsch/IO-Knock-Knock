@@ -15,6 +15,8 @@ var sys = require("util"),
     webSocketData = '',
 
     requestCallbackForSearchedDevices = '/newDevicesFound'
+    searchedDataAvailableRequest = '/newDevicesFound',
+    authorizedDataAvailableRequest = '/newAvailableDevices',
 
     rootDir = process.cwd() + '/',
     wwwDir = rootDir + 'www-data/',
@@ -33,9 +35,11 @@ function getJSON ( url, callback ) {
         return false;
     }
 
-    filesys.readFile( url, 'utf8', function ( err, data ) {
+    filesys.readFile( url, 'utf8', function ( error, data ) {
         if ( data ) {
             callback( JSON.parse( data ) );
+        } else if ( error ) {
+            console.log( 'Could Not Read JSON File %s', url );
         }
     } );
 }
@@ -53,11 +57,31 @@ function fileExists ( path, callback ) {
 }
 
 httpServer = http.createServer( function ( req, res ) {
-    console.log( req );
+    console.log( 'Request Url: %s', req.url );
 
     res.writeHead( 200, { 'Content-Type': 'text/plain' } );
-    res.write();
+    res.write( 'OK' );
     res.end();
+
+    if ( req.url === searchedDataAvailableRequest ) {
+        getJSON( searchedDevicesJson, function ( data ) {
+            var tmpData = {
+                type: 'searched-devices',
+                data: data
+            };
+
+            webSocketData = JSON.stringify( tmpData );
+        } );
+    } else if ( req.url === authorizedDataAvailableRequest ) {
+        getJSON( availableDevicesJson, function ( data ) {
+            var tmpData = {
+                type: 'auth-devices',
+                data: data
+            };
+
+            webSocketData = JSON.stringify( tmpData );
+        } );
+    }
 } ).listen( 8080 );
 console.log( 'WebServer started...' );
 
@@ -65,7 +89,6 @@ console.log( 'WebServer started...' );
 wsServer = ws.createServer( function ( connection ) {
     connection.on( "text", function ( str ) {
         console.log( "WebSocket Received Data: " + str )
-        // conn.sendText( str.toUpperCase() + "!!!" )
     } );
 
     connection.on( "close", function ( code, reason ) {
