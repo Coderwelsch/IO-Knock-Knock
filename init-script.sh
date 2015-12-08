@@ -1,3 +1,10 @@
+# nav to the directory
+cd ~/knock-knock/
+
+# fetch latest git commits
+# echo "CHECK LATEST GIT STATUS"
+# git pull
+
 # start up ble dongle and set it up
 sudo hciconfig hci0 up &
 echo "HCICONFIG PID: $!"
